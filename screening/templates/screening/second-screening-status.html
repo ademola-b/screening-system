@@ -1,0 +1,26 @@
+{% extends 'screening/header.html' %}
+
+{% block content %}
+    <div class="screening-card">
+        {% if fscreening %}
+            {{fscreening}}
+        {% if fscreening.status == 'pending' or fscreening.status == 'pending for record officer' or fscreening.status == 'pending for student affair' %}
+            <p>Your first screening isn't approved yet, you can't proceed to second screening.</p>
+        {% elif fscreening.status == 'rejected' %}
+            <p> Your first screening has been rejected, you can't proceed. Take the first screening exercise again </p>
+        {% elif fscreening.status == 'approved' %}
+            <p>Your first screening has been approved, you can proceed to second screening now </p>
+            <a href="{% url 'screening:second_screening_view' %}" class="btn btn-info">START HERE</a>
+
+
+        {% endif %}
+            
+        {% else %}
+            <p> Documents not found </p>
+        {% endif %}
+
+        First Screening - {{fscreening.status}} <br>
+        Second Screening - {{sscreening.status}}
+    </div>
+
+{% endblock content %}

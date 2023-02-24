@@ -1,0 +1,20 @@
+{% extends 'screening/header.html' %}
+
+{% block content %}
+    <div class="screening-card">
+        {% if fscreening %}
+            <p> Your first screening is {{fscreening.status}} </p>
+            <p>These are your documents </p> 
+            <img src ="{{fscreening.o_level}} " alt="o_level">
+            <br><br>
+        {% if fscreening.status == 'approved' %}
+            <p>Start your second screening here</p>
+            <a href="{% url 'screening:second_screening' %}" class="btn btn-info">Second Screening</a>
+
+        {% endif %}
+            
+        {% else %}
+            <p> Documents not found </p>
+        {% endif %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends 'record_officers/header.html' %}
+
+{% block content %}
+    <div align='center'>
+        <h5>LIST OF FIRST SCREENINGS</h5>
+
+        <div style="float: right">
+            <form action="" method="">
+                <label>Filter List by Status: </label>
+                <select name='status' id='status'>
+                    <option value='Pending'>Pending</option>
+                    <option value='Approved'>Approved</option>
+                </select>
+            </form>
+        </div>
+
+        {% if fscreening %}
+        {% for screening in fscreening %}
+            <table class="table">
+                <tr>
+                    <th>APPLICATION NO</th>
+                    <th>LEVEL</th>                
+                    <th>STATUS</th>                
+                </tr>
+                <tr>
+                    <td><a href = "{% url 'record_officer:screening_detail' screening.id %}">{{screening.student_id.application_no}}</a></td>
+                    <td>{{screening.student_id.level_id}}</td>
+                    <td>{{screening.status}}</td>
+                </tr>
+            </table>
+        {% endfor %}
+        {% else %}
+            <h3> NO FIRST SCREENING </h3>
+        {% endif %}
+    </div>
+    
+
+{% endblock content %}
+

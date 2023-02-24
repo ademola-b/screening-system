@@ -1,0 +1,26 @@
+{% extends 'screening/header.html' %}
+
+{% block title %} Second Screening {% endblock %}
+
+{% block content %}
+    
+    <div class="card-body">
+        <h3>SECOND SCREENING</h3><br>
+        <h4>Upload your credentials</h4>
+        <p>Kindly, select the appropriate credential for each field.</p>
+        <p><i><b>Only .jpg, .png and .pdf documents allowed</b></i></p>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table class="table table-borderless">
+            {% for field in form %}
+            <tr>
+                <td>{{field.label_tag}}</td> <td>{{field}}</td>
+            </tr>
+            {% endfor %}
+            <td></td><td><input class="btn btn-success" type="submit" value="submit"></td>
+            </table>
+            
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'screening/header.html' %}
+
+{% block title %}SCREENING{% endblock title %}
+{% load static%}
+{% block content %}
+<div class="card-body">
+    <h5 class="card-title text-primary">Welcome  {{user.first_name|upper}} {{user.last_name|upper}} 🎉</h5>
+    <p class="mb-4">
+        {% if fscreening is None and sscreening is None %} 
+            <div class="align-items-center">
+                <p align="center"> No records of screening yet </p>
+                <a href="{% url 'screening:first_screening' %}" class="btn btn-info">START HERE</a>
+            </div> 
+        {% elif fscreening is not None and sscreening is None %}
+            <div class="align-items-center">
+                <p align="center"> Your first screening status is {{fscreening.status|title}} </p>
+            </div>
+        {% elif fscreening is not None and sscreening is not None %}
+            <p> Second screening </p>
+        {% endif %}
+
+        
+        {% comment %} <p> First Screening - {{fscreening}}</p>
+        <p> Second Screening - {{sscreening}}</p> {% endcomment %}
+      
+</div>
+
+{% endblock content %}
