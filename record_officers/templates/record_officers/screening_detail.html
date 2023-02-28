@@ -32,16 +32,14 @@
 
             </tr>
             <tr>
-                <td>COMMENT:</td>
-                <td span=2>
-                    <form action = "" method="POST">
+                <td>COMMENT:
+                    <form action = "{% url 'record_officer:modify_screening' firstscreening.id %}" method="POST">
                         {% csrf_token %}
-                        <textarea id="comment"></textarea>
-                        <button class="btn btn-success d-grid w-100" name="approve" type="submit">APPROVE</button> <br/>
-                        <button class="btn btn-danger d-grid w-100" name="reject" type="submit">REJECT</button>
-                
+                        <textarea name="comment" id="comment"></textarea></td>
+                        <td><input type="submit" class = "btn btn-success d-grid w-100" value="Approve" name="approve">&nbsp; 
+                            <input type="submit" class = "btn btn-danger d-grid w-100" value="Reject" name="reject"></td>            
                     </form>
-                </td>
+                
                     
             </tr>
         </table>

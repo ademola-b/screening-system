@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
@@ -30,16 +31,24 @@ class FirstScreeningDetail(DetailView):
 
 def record_officer_modify(request, id):
     if request.method == 'POST':
+        print(request.POST)
         if request.POST.get('approve'):
             screening = FirstScreening.objects.get(id=id)
-            screening.status = 'Approved'
+            messages.success(request, 'Screening approved for student affair officer')
+            screening.status = 'pending for student affair'
             screening.save()
         elif request.POST.get('reject'):
+            if request.POST.get('comment') == '':
+                messages.warning(request, "Kindly state reasons why you are rejecting this request")
+                print('Kindly state reasons why you are rejecting this request')
+                return redirect(request.path_info)
             screening = FirstScreening.objects.get(id=id)
-            screening.status = 'Rejected'
+            screening.status = 'rejected'
+            print(request.POST.get('comment'))
             screening.save()
 
-    return redirect(reverse('record_officer: screening_detail'))
+    return redirect(reverse('record_officer:first_screening'))
+
   
 
     

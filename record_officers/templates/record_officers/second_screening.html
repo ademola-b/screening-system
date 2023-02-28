@@ -2,7 +2,7 @@
 
 {% block content %}
     <div align='center'>
-        <h5>LIST OF FIRST SCREENINGS</h5>
+        <h5>LIST OF SECOND SCREENINGS</h5>
 
         <div style="float: right">
             <form action="" method="">
@@ -14,8 +14,8 @@
             </form>
         </div>
 
-        {% if fscreening %}
-        {% for screening in fscreening %}
+        {% if sscreening %}
+        {% for screening in sscreening %}
             <table class="table">
                 <tr>
                     <th>APPLICATION NO</th>
@@ -30,7 +30,7 @@
             </table>
         {% endfor %}
         {% else %}
-            <h3> NO FIRST SCREENING </h3>
+            <h3> NO SECOND SCREENING </h3>
         {% endif %}
     </div>
     
