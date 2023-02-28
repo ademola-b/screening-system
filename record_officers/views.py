@@ -20,32 +20,31 @@ class FirstScreeningList(LoginRequiredMixin, ListView):
     context_object_name = 'fscreening'
 
     def get_queryset(self):
-
         return FirstScreening.objects.filter(student_id__department_id__deptName=self.request.user.recordofficer.department_id.deptName)
     
-
-
 class FirstScreeningDetail(DetailView):
     model = FirstScreening
     template_name = 'record_officers/screening_detail.html'
 
 def record_officer_modify(request, id):
     if request.method == 'POST':
-        print(request.POST)
+        #print(request.POST)
         if request.POST.get('approve'):
             screening = FirstScreening.objects.get(id=id)
-            messages.success(request, 'Screening approved for student affair officer')
             screening.status = 'pending for student affair'
             screening.save()
+            messages.success(request, 'Screening approved for student affair officer')
         elif request.POST.get('reject'):
             if request.POST.get('comment') == '':
                 messages.warning(request, "Kindly state reasons why you are rejecting this request")
                 print('Kindly state reasons why you are rejecting this request')
-                return redirect(request.path_info)
+                return redirect(request.path_info) #not working as i want, should be redirecting to the same page (reload)
             screening = FirstScreening.objects.get(id=id)
             screening.status = 'rejected'
+            screening.comment = request.POST.get('comment')
             print(request.POST.get('comment'))
             screening.save()
+            messages.success(request, 'Screening rejected')
 
     return redirect(reverse('record_officer:first_screening'))
 

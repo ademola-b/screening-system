@@ -33,7 +33,7 @@
             </tr>
             <tr>
                 <td>COMMENT:
-                    <form action = "{% url 'record_officer:modify_screening' firstscreening.id %}" method="POST">
+                    <form action = "{% url 'student_affair:modify_first_screening' firstscreening.id %}" method="POST">
                         {% csrf_token %}
                         <textarea name="comment" id="comment"></textarea></td>
                         <td><input type="submit" class = "btn btn-success d-grid w-100" value="Approve" name="approve">&nbsp; 
