@@ -19,7 +19,7 @@ def login_request(request):
                     return redirect('screening:index')
                 elif user.user_type == "record_officer":
                     return redirect('record_officer:home')
-                elif user.user_type == "student_affair_officer":
+                elif user.user_type == "student_affair":
                     return redirect('student_affair:home')
             else:
                 messages.error(request, 'Invalid credentials')

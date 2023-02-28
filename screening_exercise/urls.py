@@ -23,4 +23,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('screening/', include('screening.urls')),
     path('record-officer/', include('record_officers.urls')),
+    path('student_affairs/', include('student_affair_officers.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
