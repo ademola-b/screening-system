@@ -29,6 +29,7 @@ def fscreening_modify(request, id):
         if request.POST.get('approve'):
             fscreening = FirstScreening.objects.get(id=id)
             fscreening.status = 'approved'
+            fscreening.comment = 'Approved'
             fscreening.save()
             messages.success(request, 'Screening successfully approved')
         elif request.POST.get('reject'):

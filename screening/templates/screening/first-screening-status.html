@@ -1,14 +1,67 @@
 {% extends 'screening/header.html' %}
 
 {% block content %}
-    <div class="screening-card">
-        {% if fscreening %}
-            <p> Your first screening is {{fscreening.status}} </p>
-            <p>These are your documents </p> 
-            <img src ="{{fscreening.o_level}} " alt="o_level">
-            <br><br>
+        <div class="screening-card">
+            {% if fscreening %}
+            <h5> Your first screening is {{fscreening.status}} </h5> <br/>
+            <h5>These are your first screening documents </h5>
+                
+            <div style="display:inline-flex; margin: 20px">
+                <div class="screening-status-card">
+                    <img src ="{{fscreening.o_level.url}}" alt="o_level" width="150", height="150"/>
+                    <div class="container">
+                        <h5><b>O'Level</b></h5> 
+                    </div>
+                </div>
+
+                <div class="screening-status-card">
+                    <img src="{{fscreening.indigene_certificate.url}}" alt="ind_cert" width="150", height="150"/>
+                        
+                    <div class="container">
+                        <h5><b>Indigene Certificate</b></h5> 
+                    </div>
+                </div>
+
+                    <div class="screening-status-card">
+                        <img src="{{fscreening.pry_certificate.url}}" alt="pry_cert" width="150", height="150"/>
+                        
+                        <div class="container">
+                            <h5><b>Primary School Cert.</b></h5> 
+                        </div>
+                    </div>
+
+                    <div class="screening-status-card">
+                        <img src="{{fscreening.ND_result.url}}" alt="ND" width="150", height="150"/>
+                        <div class="container">
+                            <h5><b>National Diploma Result</b></h5> 
+                        </div>
+                    </div>
+
+                    <div class="screening-status-card">
+                        <img src="{{fscreening.admission_letter.url}}" alt="adm_letter" width="150", height="150"/>
+                        <div class="container">
+                            <h5><b>Admission Letter</b></h5> 
+                        </div>
+                    </div>
+
+                    <div class="screening-status-card">
+                        <img src="{{fscreening.acceptance_fee_receipt.url}}" alt="acceptance_fee" width="150", height="150"/>
+                        <div class="container">
+                            <h5><b>Acceptance Fee Receipt</b></h5> 
+                        </div>
+                    </div>
+                
+                </div>
+
+        {% if fscreening.status == 'rejected' %}
+            <h5> First Screening was rejected due to the following reason(s): </h5>
+            <h6>{{fscreening.comment}}</h6> <br/>
+            <p> Retake screening here <a href="{% url 'screening:first_screening' %}" class="btn btn-info">First Screening</a> </p>
+
+        {% endif %}
+
         {% if fscreening.status == 'approved' %}
-            <p>Start your second screening here</p>
+            <h5 align="center"> First Screening has been approved you can start your second screening here </h5> 
             <a href="{% url 'screening:second_screening' %}" class="btn btn-info">Second Screening</a>
 
         {% endif %}

@@ -2,6 +2,67 @@
 
 {% block content %}
     <div class="screening-card">
+
+        {% if sscreening %}
+        <h5> Your second screening is {{sscreening.status}} </h5> <br/>
+        <h5>These are your second screening documents </h5>
+        
+        <div style="display:inline-flex;">
+            <div class="screening-status-card" style="margin: 20px;">
+                <img src ="{{sscreening.acceptance_form.url}}" alt="o_level" width="150", height="150"/>
+                <div class="container">
+                    <h5><b>Acceptance Form</b></h5> 
+                </div>
+            </div>
+
+            <div class="screening-status-card">
+                <img src="{{sscreening.school_fee_receipt.url}}" alt="ind_cert" width="150", height="150"/>
+                    
+                <div class="container">
+                    <h5><b>School Fee Receipt</b></h5> 
+                </div>
+            </div>
+
+                <div class="screening-status-card">
+                    <img src="{{sscreening.medical_receipt.url}}" alt="pry_cert" width="150", height="150"/>
+                    
+                    <div class="container">
+                        <h5><b>Medical Receipt.</b></h5> 
+                    </div>
+                </div>
+
+                <div class="screening-status-card">
+                    <img src="{{sscreening.entrepreneur_receipt.url}}" alt="ND" width="150", height="150"/>
+                    <div class="container">
+                        <h5><b>Entreprenuer Receipt</b></h5> 
+                    </div>
+                </div>
+
+                <br/><br/>
+                <div class="screening-status-card">
+                    <img src="{{sscreening.jamb_admission_letter.url}}" alt="adm_letter" width="150", height="150"/>
+                    <div class="container">
+                        <h5><b>Jamb Admission Letter</b></h5> 
+                    </div>
+                </div>
+
+                <div class="screening-status-card">
+                    <img src="{{sscreening.jamb_original_result.url}}" alt="acceptance_fee" width="150", height="150"/>
+                    <div class="container">
+                        <h5><b>Jamb Original Result</b></h5> 
+                    </div>
+                </div>
+
+                <div class="screening-status-card">
+                    <img src="{{sscreening.attestation_letter.url}}" alt="acceptance_fee" width="150", height="150"/>
+                    <div class="container">
+                        <h5><b>Attestation Letter</b></h5> 
+                    </div>
+                </div>
+            
+            </div>
+        {% endif %}
+
         {% if fscreening %}
             {{fscreening}}
         {% if fscreening.status == 'pending' or fscreening.status == 'pending for record officer' or fscreening.status == 'pending for student affair' %}
@@ -11,8 +72,6 @@
         {% elif fscreening.status == 'approved' %}
             <p>Your first screening has been approved, you can proceed to second screening now </p>
             <a href="{% url 'screening:second_screening_view' %}" class="btn btn-info">START HERE</a>
-
-
         {% endif %}
             
         {% else %}

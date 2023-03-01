@@ -32,6 +32,7 @@ def record_officer_modify(request, id):
         if request.POST.get('approve'):
             screening = FirstScreening.objects.get(id=id)
             screening.status = 'pending for student affair'
+            screening.comment = 'pending for student affair'
             screening.save()
             messages.success(request, 'Screening approved for student affair officer')
         elif request.POST.get('reject'):

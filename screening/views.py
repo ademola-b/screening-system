@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -15,7 +16,7 @@ from . models import SecondScreening
 def onboard(request):
     return render(request, 'screening/onboard.html', context={})
 
-@login_required()
+@login_required
 def index(request):
     try:
         fscreening = FirstScreening.objects.get(student_id=request.user.student.firstscreening.student_id)
@@ -30,7 +31,7 @@ def index(request):
     return render(request, 'screening/index.html', context={'fscreening':fscreening, 'sscreening':sscreening})
 
 
-class FirstScreeningForm(View):
+class FirstScreeningForm(LoginRequiredMixin, View):
     form_class = FirstScreeningUpload
     template_name = 'screening/first-screening.html'
 
@@ -82,6 +83,7 @@ class FirstScreeningView(ListView):
             
             return redirect('screening:first_screening')
 
+@login_required
 def firstScreeningView(request):
     try:
         fscreening = FirstScreening.objects.get(student_id=request.user.student.firstscreening.student_id)
@@ -91,6 +93,7 @@ def firstScreeningView(request):
 
     return render(request, template_name='screening/first-screening-status.html', context={'fscreening':fscreening})
 
+@login_required
 def secondScreeningView(request):
     try:
         fscreening = FirstScreening.objects.get(student_id=request.user.student.firstscreening.student_id)
@@ -118,13 +121,18 @@ class SecondScreeningForm(View):
         try:
             form.fields['student_id'].queryset = Student.objects.filter(application_no = request.user.student.application_no)
             form.fields['first_screening'].queryset = FirstScreening.objects.filter(student_id = request.user.student.firstscreening.student_id) #set the user first_screening details
+            fscreening = FirstScreening.objects.get(student_id = request.user.student.firstscreening.student_id)
+            if  fscreening.status != 'approved':
+                messages.warning(request, 'Your first screening has not been approved')
+                print('Your first screening has been approved')
+                return redirect('screening:index')
+                
             if not form.fields['first_screening']:
                 messages.error(request, 'First Screening Record not found')
                 return redirect('screening:first_screening')
             elif not form.fields['student_id']:
                 messages.error(request, 'Account not found, Kindly login now')
-                return redirect('account:login')
-            
+                return redirect('account:login') 
         except:
             messages.error(request, 'An error occurred, Kindly login')
             return redirect('accounts:login')
