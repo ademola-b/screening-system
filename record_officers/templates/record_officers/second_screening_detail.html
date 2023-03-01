@@ -1,0 +1,53 @@
+{% extends 'screening/header.html' %}
+
+{% block content %}
+    <div align='center'>
+        {% if firstscreening %}
+        <p> First Screening Detail For:</p>
+        <div style="float:right">
+            <img src="{{firstscreening.student_id.profile_pix.url}}" width=200 height=200/>
+        </div>
+        <div style="float:left; margin-left:30px">
+            <h5>APPLICATION NO: {{firstscreening.student_id.application_no}}</h5>  
+            <h5>DATE SUBMITTED: {{firstscreening.dateSubmitted}}</h5>
+            <h5>STATUS: {{firstscreening.status|upper}}</h5> 
+        </div>
+        
+        <table class="table">
+            <tr>
+                <td>O_Level:</td>
+                <td><img src="{{firstscreening.o_level.url}}" alt="o_level" width="200", height="200"/></td>
+                <td>Indigene Certificate:</td>
+                <td><img src="{{firstscreening.indigene_certificate.url}}" alt="ind_cert" width="200", height="200"/></td>
+                <td>Primary School Leaving Certificate: </td>
+                <td><img src="{{firstscreening.pry_certificate.url}}" alt="pry_cert" width="200", height="200"/></td>
+            </tr>
+            <tr>
+                <td>National Diploma Result</td>
+                <td><img src="{{firstscreening.ND_result.url}}" alt="ND" width="200", height="200"/></td>
+                <td>Admission Letter:</td>
+                <td><img src="{{firstscreening.admission_letter.url}}" alt="adm_letter" width="200", height="200"/></td>
+                <td>Acceptance Fee:</td>
+                <td><img src="{{firstscreening.acceptance_fee_receipt.url}}" alt="acceptance_fee" width="200", height="200"/></td>
+
+            </tr>
+            <tr>
+                <td>COMMENT:
+                    <form action = "{% url 'record_officer:modify_screening' firstscreening.id %}" method="POST">
+                        {% csrf_token %}
+                        <textarea name="comment" id="comment"></textarea></td>
+                        <td><input type="submit" class = "btn btn-success d-grid w-100" value="Approve" name="approve">&nbsp; 
+                            <input type="submit" class = "btn btn-danger d-grid w-100" value="Reject" name="reject"></td>            
+                    </form>
+                
+                    
+            </tr>
+        </table>
+     
+            
+        {% endif %}
+    </div>
+    
+
+{% endblock content %}
+

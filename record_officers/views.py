@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 
-from screening.models import FirstScreening
+from screening.models import FirstScreening, SecondScreening
 
 # Create your views here.
 @login_required
@@ -24,8 +24,9 @@ class FirstScreeningList(LoginRequiredMixin, ListView):
     
 class FirstScreeningDetail(DetailView):
     model = FirstScreening
-    template_name = 'record_officers/screening_detail.html'
+    template_name = 'record_officers/first_screening_detail.html'
 
+@login_required
 def record_officer_modify(request, id):
     if request.method == 'POST':
         #print(request.POST)
@@ -48,6 +49,11 @@ def record_officer_modify(request, id):
             messages.success(request, 'Screening rejected')
 
     return redirect(reverse('record_officer:first_screening'))
+
+class SecondScreeningList(LoginRequiredMixin, ListView):
+    model = SecondScreening
+    template_name = 'record_officers/second_screening.html'
+    context_object_name = 'sscreening'
 
   
 
