@@ -2,38 +2,43 @@
 
 {% block content %}
     <div align='center'>
-        {% if firstscreening %}
-        <p> First Screening Detail For:</p>
+        {% if secondscreening %}
+        <h4> Second Screening Detail For:</h4>
         <div style="float:right">
-            <img src="{{firstscreening.student_id.profile_pix.url}}" width=200 height=200/>
+            <img src="{{secondscreening.student_id.profile_pix.url}}" width=200 height=200/>
         </div>
-        <div style="float:left; margin-left:30px">
-            <h5>APPLICATION NO: {{firstscreening.student_id.application_no}}</h5>  
-            <h5>DATE SUBMITTED: {{firstscreening.dateSubmitted}}</h5>
-            <h5>STATUS: {{firstscreening.status|upper}}</h5> 
+        <div style=" margin-left:30px">
+            <h5>APPLICATION NO: {{secondscreening.first_screening.student_id.application_no}}</h5>  
+            <h5>DATE SUBMITTED: {{secondscreening.dateSubmitted}}</h5>
+            <h5>STATUS: {{secondscreening.status|upper}}</h5> 
         </div>
         
+        <br/><br/>        
+        <a href="">View First Screening</a>
+  
         <table class="table">
             <tr>
-                <td>O_Level:</td>
-                <td><img src="{{firstscreening.o_level.url}}" alt="o_level" width="200", height="200"/></td>
-                <td>Indigene Certificate:</td>
-                <td><img src="{{firstscreening.indigene_certificate.url}}" alt="ind_cert" width="200", height="200"/></td>
-                <td>Primary School Leaving Certificate: </td>
-                <td><img src="{{firstscreening.pry_certificate.url}}" alt="pry_cert" width="200", height="200"/></td>
+                <td>Acceptance Form:</td>
+                <td><img src="{{secondscreening.acceptance_form.url}}" alt="o_level" width="150", height="150"/></td>
+                <td>School Fee Receipt:</td>
+                <td><img src="{{secondscreening.school_fee_receipt.url}}" alt="ind_cert" width="150", height="150"/></td>
+                <td>Entreprenuer Receipt: </td>
+                <td><img src="{{secondscreening.entrepreneur_receipt.url}}" alt="pry_cert" width="150", height="150"/></td>
             </tr>
             <tr>
-                <td>National Diploma Result</td>
-                <td><img src="{{firstscreening.ND_result.url}}" alt="ND" width="200", height="200"/></td>
-                <td>Admission Letter:</td>
-                <td><img src="{{firstscreening.admission_letter.url}}" alt="adm_letter" width="200", height="200"/></td>
-                <td>Acceptance Fee:</td>
-                <td><img src="{{firstscreening.acceptance_fee_receipt.url}}" alt="acceptance_fee" width="200", height="200"/></td>
+                <td>Medical Receipt</td>
+                <td><img src="{{secondscreening.medical_receipt.url}}" alt="ND" width="150", height="150"/></td>
+                <td>Jamb Admission Letter:</td>
+                <td><img src="{{secondscreening.jamb_admission_letter.url}}" alt="adm_letter" width="150", height="150"/></td>
+                <td>Jamb Original Result:</td>
+                <td><img src="{{secondscreening.jamb_original_result.url}}" alt="acceptance_fee" width="150", height="150"/></td>
+                <td>Attestation Letter:</td>
+                <td><img src="{{secondscreening.attestation_letter.url}}" alt="acceptance_fee" width="150", height="150"/></td>
 
             </tr>
             <tr>
                 <td>COMMENT:
-                    <form action = "{% url 'record_officer:modify_screening' firstscreening.id %}" method="POST">
+                    <form action = "{% url 'record_officer:second_screening_modification' secondscreening.id %}" method="POST">
                         {% csrf_token %}
                         <textarea name="comment" id="comment"></textarea></td>
                         <td><input type="submit" class = "btn btn-success d-grid w-100" value="Approve" name="approve">&nbsp; 
@@ -44,7 +49,8 @@
             </tr>
         </table>
      
-            
+        {% else %}
+            <h4>No Detail </h4>
         {% endif %}
     </div>
     

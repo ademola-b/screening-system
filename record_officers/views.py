@@ -27,7 +27,7 @@ class FirstScreeningDetail(DetailView):
     template_name = 'record_officers/first_screening_detail.html'
 
 @login_required
-def record_officer_modify(request, id):
+def record_officer_first_modify(request, id):
     if request.method == 'POST':
         #print(request.POST)
         if request.POST.get('approve'):
@@ -55,7 +55,33 @@ class SecondScreeningList(LoginRequiredMixin, ListView):
     template_name = 'record_officers/second_screening.html'
     context_object_name = 'sscreening'
 
+class SecondScreeningDetail(LoginRequiredMixin, DetailView):
+    model = SecondScreening
+    template_name = 'record_officers/second_screening_detail.html'
   
+@login_required
+def record_officer_second_modify(request, id):
+    if request.method == 'POST':
+        #print(request.POST)
+        if request.POST.get('approve'):
+            screening = SecondScreening.objects.get(id=id)
+            screening.status = 'pending for student affair'
+            screening.comment = 'pending for student affair'
+            screening.save()
+            messages.success(request, 'Second Screening approved for student affair officer')
+        elif request.POST.get('reject'):
+            if request.POST.get('comment') == '':
+                messages.warning(request, "Kindly state reasons why you are rejecting this request")
+                print('Kindly state reasons why you are rejecting this request')
+                return redirect(request.path_info) #not working as i want, should be redirecting to the same page (reload)
+            screening = SecondScreening.objects.get(id=id)
+            screening.status = 'rejected'
+            screening.comment = request.POST.get('comment')
+            print(request.POST.get('comment'))
+            screening.save()
+            messages.success(request, 'Screening rejected')
+
+    return redirect(reverse('record_officer:second_screening'))
 
     
 

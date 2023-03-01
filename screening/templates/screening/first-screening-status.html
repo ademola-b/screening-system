@@ -62,7 +62,7 @@
 
         {% if fscreening.status == 'approved' %}
             <h5 align="center"> First Screening has been approved you can start your second screening here </h5> 
-            <a href="{% url 'screening:second_screening' %}" class="btn btn-info">Second Screening</a>
+            <a href="{% url 'screening:second_screening_view' %}" class="btn btn-info">Second Screening</a>
 
         {% endif %}
             

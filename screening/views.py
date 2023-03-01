@@ -99,7 +99,7 @@ def secondScreeningView(request):
         fscreening = FirstScreening.objects.get(student_id=request.user.student.firstscreening.student_id)
         sscreening = SecondScreening.objects.get(student_id=request.user.student.secondscreening.student_id)     
     except FirstScreening.DoesNotExist:
-        messages.error(request, 'First screening hasa not been approved!')
+        messages.error(request, 'First screening has not been approved!')
         return redirect('screening:first_screening')
     except SecondScreening.DoesNotExist:
         return redirect('screening:second_screening')
@@ -154,8 +154,10 @@ class SecondScreeningForm(View):
                 form_data = form.save(commit=False)
                 form_data.status = 'pending for record officer'
                 form_data.save()
-                messages.success(request, 'Documents submitted, wait for approval')
+                messages.success(request, 'Documents submitted, Kindly wait for approval')
                 return redirect('screening:index')
+            else:
+                messages.warning(request, "An error occurred, kindly check the documents you are uploading.")
         else:
             messages.error(request, 'User has not done first screening')
             return redirect('screening:first_screening')
