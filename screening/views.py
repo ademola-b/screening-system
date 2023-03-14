@@ -14,7 +14,7 @@ from . models import SecondScreening
 # Create your views here.
 
 def onboard(request):
-    return render(request, 'screening/onboard.html', context={})
+    return render(request, 'screening/homepage.html', context={})
 
 @login_required
 def index(request):

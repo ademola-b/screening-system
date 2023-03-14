@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from screening.models import FirstScreening, SecondScreening
-
+from students.models import Department
 
 # Create your views here.
 def homepage(request):
@@ -83,4 +83,9 @@ def sscreening_modify(request, id):
             messages.success(request, 'Screening rejected')
 
     return redirect(reverse('student_affair:second_screening'))
+
+class DepartmentsView(LoginRequiredMixin, ListView):
+    model = Department
+    template_name = 'student_affair_officers/departments.html'
+    context_object_name = 'departments'
     

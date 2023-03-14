@@ -10,4 +10,5 @@ urlpatterns = [
     path('second-screening/', views.SecondScreeningList.as_view(), name='second_screening'),
     path('second-screening/<int:pk>/', views.SecondScreeningDetail.as_view(), name='second_screening_detail'),
     path('second-screening-modify/<int:id>/', views.sscreening_modify, name='second_screening_modification'),
+    path('departments/', views.DepartmentsView.as_view(), name='departments')
 ]

@@ -7,8 +7,6 @@ from django.core.exceptions import ValidationError
 
 
 # Create your models here.
-
-
 status = [
     ('pending', 'pending'),
     ('pending for record officer', 'pending for record officer'),
