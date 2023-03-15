@@ -13,7 +13,7 @@ from . models import FirstScreening
 from . models import SecondScreening
 # Create your views here.
 
-def onboard(request):
+def homepage(request):
     return render(request, 'screening/homepage.html', context={})
 
 @login_required
@@ -38,34 +38,47 @@ class FirstScreeningForm(LoginRequiredMixin, View):
     #load an empty form when page first load
     def get(self, request): 
         form = self.form_class()
+        # form =FirstScreeningUpload(initial={'student_id':request.user.student})
 
-        try:
-            form.fields['student_id'].queryset = Student.objects.filter(application_no=request.user.student.application_no) #get the logged in user's email address
-            if not form.fields['student_id']: #user not logged in, login now
-                messages.error(request, 'User not logged in')
-                return redirect('accounts:login')
-        except CustomUser.DoesNotExist:
-            messages.error(request, 'An error occured, login now')
-            return redirect('accounts:login')
+
+        # try:
+        #     # form.fields['student_id'].queryset = Student.objects.filter(application_no=request.user.student.application_no) #get the logged in user's email address
+        #     if not form.fields['student_id']: #user not logged in, login now
+        #         messages.error(request, 'User not logged in')
+        #         return redirect('accounts:login')
+        # except CustomUser.DoesNotExist:
+        #     messages.error(request, 'An error occured, login now')
+        #     return redirect('accounts:login')
             
         return render(request, self.template_name, context={'form':form})
 
     def post(self, request):
         # get the details filled in form
         form = self.form_class(request.POST, request.FILES)
-        form.fields['student_id'].queryset = Student.objects.filter(application_no=request.user.student.application_no)
-        if form.fields['student_id'].queryset:
-            if form.is_valid():
-                FirstScreening.status = 'pending for record officer'
-                form.save()
+        if form.is_valid():
+            fsc = FirstScreening.objects.filter(student_id=request.user.student).exists()
+            if fsc:
+                rec = FirstScreening.objects.get(student_id=request.user.student)
+                rec.o_level = form.cleaned_data.get('o_level')
+                rec.indigene_certificate = form.cleaned_data.get('indigene_certificate')
+                rec.pry_certificate = form.cleaned_data.get('pry_certificate')
+                rec.ND_result = form.cleaned_data.get('ND_result')
+                rec.admission_letter = form.cleaned_data.get('admission_letter')
+                rec.acceptance_fee_receipt = form.cleaned_data.get('acceptance_fee_receipt')
+                rec.status = 'pending for record officer'
+                rec.save()
                 messages.success(request, "Request sent, kindly wait for approval")
                 return redirect('screening:index')
             else:
-                messages.error(request, 'An error occured')
+                form = form.save(commit=False)
+                form.student_id = request.user.student
+                form.status = 'pending for record officer'
+                form.save()
+                messages.success(request, "Request sent, kindly wait for approval")
+                return redirect('screening:index')
         else:
-            messages.error(request, 'Student details not found, kndly login')
-            return redirect('accounts:login')
-        
+            messages.danger(request, f"An error occurred: {form.errors.as_text}")
+
         return render(request, self.template_name, context={'form':form})
 
 class FirstScreeningView(ListView):

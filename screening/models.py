@@ -16,7 +16,7 @@ status = [
 ]
 
 def student_directory_path(instance, filename):
-    return '{0}/{1}'.format(instance.student_id.application_no, filename)
+    return '{0}/{1}'.format(instance.student_id, filename)
 
 
 def validate_file_extension(value):
@@ -29,15 +29,15 @@ def validate_file_extension(value):
 
 class FirstScreening(models.Model):
     student_id = models.OneToOneField(Student, on_delete=models.CASCADE)
-    o_level = models.FileField(upload_to=student_directory_path, validators=[validate_file_extension])
-    indigene_certificate = models.FileField(upload_to=student_directory_path, validators=[validate_file_extension])
-    pry_certificate = models.FileField(upload_to=student_directory_path, validators=[validate_file_extension])
-    ND_result = models.FileField(upload_to=student_directory_path, validators=[validate_file_extension])
-    admission_letter = models.FileField(upload_to=student_directory_path, validators=[validate_file_extension])
-    acceptance_fee_receipt = models.FileField(upload_to=student_directory_path, validators=[validate_file_extension])
+    o_level = models.FileField(upload_to='upload/', validators=[validate_file_extension])
+    indigene_certificate = models.FileField(upload_to='upload/', validators=[validate_file_extension])
+    pry_certificate = models.FileField(upload_to='upload/', validators=[validate_file_extension])
+    ND_result = models.FileField(upload_to='upload/', validators=[validate_file_extension])
+    admission_letter = models.FileField(upload_to='upload/', validators=[validate_file_extension])
+    acceptance_fee_receipt = models.FileField(upload_to='upload/', validators=[validate_file_extension])
     dateSubmitted = models.DateTimeField(auto_now_add=True)
     dateApproved = models.DateTimeField(auto_now_add=False, auto_now=True)
-    status = models.CharField(max_length=30, default='Pending', choices=status)
+    status = models.CharField(max_length=30, default='pending', choices=status)
     comment = models.TextField(max_length=1000, blank=True)
 
     def __str__(self):

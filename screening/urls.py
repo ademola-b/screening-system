@@ -4,7 +4,7 @@ from . import views
 
 app_name = 'screening'
 urlpatterns = [
-    path('', views.onboard, name='onboard'),
+    path('', views.homepage, name='onboard'),
     path('index/', views.index, name='index'),
     path('first-screening/', views.FirstScreeningForm.as_view(), name='first_screening'),
     path('first-screening-view/', views.firstScreeningView, name='first_screening_view'),

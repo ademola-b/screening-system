@@ -6,16 +6,16 @@ from . models import FirstScreening
 from . models import SecondScreening
 
 class FirstScreeningUpload(forms.ModelForm):
-    student_id = forms.ModelChoiceField(queryset=Student.objects.none(), empty_label=None)
+    # student_id = forms.ModelChoiceField(queryset=Student.objects.none(), empty_label=None)
     
     class Meta:
         model = FirstScreening
 
-        fields = ['student_id','o_level', 'indigene_certificate', 'pry_certificate', 
+        fields = ['o_level', 'indigene_certificate', 'pry_certificate', 
                     'ND_result', 'admission_letter', 'acceptance_fee_receipt']
 
         # widgets = {
-        #     'student_id':forms.Select(attrs={'disabled':'true'})
+        #     'student_id':forms.Select(attrs={'hidden':'hidden'})
         # }
 
 class SecondScreeningUpload(forms.ModelForm):

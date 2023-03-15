@@ -8,11 +8,11 @@
             <table class="table table-bordered table-striped">
                 <tr>
                     <th>S/N</th>
-                    <th>DEPARTMENT</th>              
+                    <th>DEPARTMENTS</th>              
                 </tr>
         {% for dept in departments %}
                 <tr>
-                    <td></td>
+                    <td>{{forloop.counter}}</td>
                     <td>{{dept.deptName}}</td>
                 </tr>
         {% endfor %}
