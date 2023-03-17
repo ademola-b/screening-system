@@ -19,7 +19,7 @@ class FirstScreeningList(LoginRequiredMixin, ListView):
 
     #override get queryset method
     def get_queryset(self):
-        return FirstScreening.objects.filter(status = 'pending for student affair')
+        return FirstScreening.objects.filter(status__in = ['pending for student affair', 'approved'])
 
 class FirstScreeningDetail(DetailView):
     model = FirstScreening
@@ -54,7 +54,7 @@ class SecondScreeningList(LoginRequiredMixin, ListView):
     context_object_name = 'sscreening'
 
     def get_queryset(self):
-        return SecondScreening.objects.filter(status = 'pending for student affair')
+        return SecondScreening.objects.filter(status__in = ['pending for student affair', 'approved'])
 
 class SecondScreeningDetail(LoginRequiredMixin, DetailView):
     model = SecondScreening

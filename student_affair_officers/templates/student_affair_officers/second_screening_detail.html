@@ -1,7 +1,7 @@
 {% extends 'screening/header.html' %}
 
 {% block content %}
-    <div align='center'>
+    <div class="card-body">
         {% if secondscreening %}
         <h4> Second Screening Detail For:</h4>
         <div style="float:right">
@@ -14,33 +14,26 @@
         </div>
         
         <br/><br/>        
-        <a href="">View First Screening</a>
+        <a href="{% url 'student_affair:first_screening_detail' secondscreening.first_screening.id %}" class="btn btn-info">View First Screening</a>
   
         <table class="table">
             <tr>
-                <td>Acceptance Form:</td>
-                <td><img src="{{secondscreening.acceptance_form.url}}" alt="o_level" width="150", height="150"/></td>
-                <td>School Fee Receipt:</td>
-                <td><img src="{{secondscreening.school_fee_receipt.url}}" alt="ind_cert" width="150", height="150"/></td>
-                <td>Entreprenuer Receipt: </td>
-                <td><img src="{{secondscreening.entrepreneur_receipt.url}}" alt="pry_cert" width="150", height="150"/></td>
+                <td><h6>Acceptance Form</h6><img src="{{secondscreening.acceptance_form.url}}" alt="o_level" width="150", height="150"/></td>
+                <td><h6>School Fee Receipt</h6><img src="{{secondscreening.school_fee_receipt.url}}" alt="ind_cert" width="150", height="150"/></td>
+                <td><h6>Entreprenuer Receipt</h6><img src="{{secondscreening.entrepreneur_receipt.url}}" alt="pry_cert" width="150", height="150"/></td>
+                <td><h6>Medical Receipt</h6><img src="{{secondscreening.medical_receipt.url}}" alt="ND" width="150", height="150"/></td>
             </tr>
             <tr>
-                <td>Medical Receipt</td>
-                <td><img src="{{secondscreening.medical_receipt.url}}" alt="ND" width="150", height="150"/></td>
-                <td>Jamb Admission Letter:</td>
-                <td><img src="{{secondscreening.jamb_admission_letter.url}}" alt="adm_letter" width="150", height="150"/></td>
-                <td>Jamb Original Result:</td>
-                <td><img src="{{secondscreening.jamb_original_result.url}}" alt="acceptance_fee" width="150", height="150"/></td>
-                <td>Attestation Letter:</td>
-                <td><img src="{{secondscreening.attestation_letter.url}}" alt="acceptance_fee" width="150", height="150"/></td>
+                <td><h6>Jamb Admission Letter</h6><img src="{{secondscreening.jamb_admission_letter.url}}" alt="adm_letter" width="150", height="150"/></td>
+                <td><h6>Jamb Original Result</h6><img src="{{secondscreening.jamb_original_result.url}}" alt="acceptance_fee" width="150", height="150"/></td>
+                <td><h6>Attestation Letter</h6><img src="{{secondscreening.attestation_letter.url}}" alt="acceptance_fee" width="150", height="150"/></td>
 
             </tr>
             <tr>
-                <td>COMMENT:
+                <td><h6>COMMENT</h6>
                     <form action = "{% url 'student_affair:second_screening_modification' secondscreening.id %}" method="POST">
                         {% csrf_token %}
-                        <textarea name="comment" id="comment"></textarea></td>
+                        <textarea name="comment" id="comment" class="d-grid w-100"></textarea></td>
                         <td><input type="submit" class = "btn btn-success d-grid w-100" value="Approve" name="approve">&nbsp; 
                             <input type="submit" class = "btn btn-danger d-grid w-100" value="Reject" name="reject"></td>            
                     </form>

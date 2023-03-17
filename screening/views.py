@@ -81,7 +81,6 @@ class FirstScreeningView(ListView):
             qs = FirstScreening.objects.get(student_id=student)
             return qs
         except:
-            
             return redirect('screening:first_screening')
 
 @login_required
