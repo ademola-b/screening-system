@@ -30,33 +30,20 @@ def index(request):
 
     return render(request, 'screening/index.html', context={'fscreening':fscreening, 'sscreening':sscreening})
 
-
 class FirstScreeningForm(LoginRequiredMixin, View):
     form_class = FirstScreeningUpload
     template_name = 'screening/first-screening.html'
 
     #load an empty form when page first load
     def get(self, request): 
-        form = self.form_class()
-        # form =FirstScreeningUpload(initial={'student_id':request.user.student})
-
-
-        # try:
-        #     # form.fields['student_id'].queryset = Student.objects.filter(application_no=request.user.student.application_no) #get the logged in user's email address
-        #     if not form.fields['student_id']: #user not logged in, login now
-        #         messages.error(request, 'User not logged in')
-        #         return redirect('accounts:login')
-        # except CustomUser.DoesNotExist:
-        #     messages.error(request, 'An error occured, login now')
-        #     return redirect('accounts:login')
-            
+        form = self.form_class()            
         return render(request, self.template_name, context={'form':form})
 
     def post(self, request):
         # get the details filled in form
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            fsc = FirstScreening.objects.filter(student_id=request.user.student).exists()
+            fsc = FirstScreening.objects.filter(student_id=request.user.student).exists() #check if record exists, update if yes
             if fsc:
                 rec = FirstScreening.objects.get(student_id=request.user.student)
                 rec.o_level = form.cleaned_data.get('o_level')
@@ -66,6 +53,7 @@ class FirstScreeningForm(LoginRequiredMixin, View):
                 rec.admission_letter = form.cleaned_data.get('admission_letter')
                 rec.acceptance_fee_receipt = form.cleaned_data.get('acceptance_fee_receipt')
                 rec.status = 'pending for record officer'
+                rec.comment = 'pending for record officer'
                 rec.save()
                 messages.success(request, "Request sent, kindly wait for approval")
                 return redirect('screening:index')
@@ -127,27 +115,22 @@ class SecondScreeningForm(View):
         #on first load of page
         form = self.form_class()
         
-        #get user details
-    #    FirstScreening.objects.get(student_id=request.user.student.firstscreening.student_id)
-    # request.user.student.id
-        
         try:
-            form.fields['student_id'].queryset = Student.objects.filter(application_no = request.user.student.application_no)
-            form.fields['first_screening'].queryset = FirstScreening.objects.filter(student_id = request.user.student.firstscreening.student_id) #set the user first_screening details
+            # form.fields['student_id'].queryset = Student.objects.filter(application_no = request.user.student.application_no)
+            # form.fields['first_screening'].queryset = FirstScreening.objects.filter(student_id = request.user.student.firstscreening.student_id) #set the user first_screening details
             fscreening = FirstScreening.objects.get(student_id = request.user.student.firstscreening.student_id)
             if  fscreening.status != 'approved':
                 messages.warning(request, 'Your first screening has not been approved')
-                print('Your first screening has been approved')
                 return redirect('screening:index')
                 
-            if not form.fields['first_screening']:
-                messages.error(request, 'First Screening Record not found')
-                return redirect('screening:first_screening')
-            elif not form.fields['student_id']:
-                messages.error(request, 'Account not found, Kindly login now')
-                return redirect('account:login') 
+            # if not form.fields['first_screening']:
+            #     messages.error(request, 'First Screening Record not found')
+            #     return redirect('screening:first_screening')
+            # elif not form.fields['student_id']:
+            #     messages.error(request, 'Account not found, Kindly login now')
+            #     return redirect('account:login') 
         except:
-            messages.error(request, 'An error occurred, Kindly login')
+            messages.error(request, "An error occurred, Kindly login")
             return redirect('accounts:login')
        
         return render(request, self.template_name, context={'form':form})
@@ -157,23 +140,62 @@ class SecondScreeningForm(View):
         form = self.form_class(request.POST, request.FILES)
         
         try:
-            form.fields['student_id'].queryset = Student.objects.filter(application_no = request.user.student.application_no)
-            form.fields['first_screening'].queryset = FirstScreening.objects.filter(student_id = request.user.student.firstscreening.student_id) #set the user first_screening details 
+            # form.fields['student_id'].queryset = Student.objects.filter(application_no = request.user.student.application_no)
+            # form.fields['first_screening'].queryset = FirstScreening.objects.filter(student_id = request.user.student.firstscreening.student_id) #set the user first_screening details 
+            #get the first screening of the user, display appropriate message
+            fscreening = FirstScreening.objects.get(student_id = request.user.student.firstscreening.student_id)
+            print(fscreening)
+            if not fscreening:
+                messages.warning(request, "You have not done your first screening, kindly do so now.")
+                return redirect('screening:first_screening')
+            else:  
+                if fscreening.status != 'approved':
+                    messages.warning(request, 'Your first screening has not been approved')
+                    return redirect('screening:index')
         except:
             return redirect('accounts:login')
 
-        if form.fields['student_id'].queryset:
-            if form.is_valid():
+        if form.is_valid():
+            ssc = SecondScreening.objects.filter(student_id=request.user.student).exists()
+            print(f"form: {form}")
+            if ssc:
+                rec = SecondScreening.objects.get(student_id = request.user.student)
+                rec.first_screening = fscreening
+                rec.acceptance_form = form.cleaned_data['acceptance_form']
+                rec.school_fee_receipt = form.cleaned_data['school_fee_receipt']
+                rec.medical_receipt = form.cleaned_data['medical_receipt']
+                rec.entrepreneur_receipt = form.cleaned_data['entrepreneur_receipt']
+                rec.jamb_admission_letter = form.cleaned_data['jamb_admission_letter']
+                rec.jamb_original_result = form.cleaned_data['jamb_original_result']
+                rec.attestation_letter = form.cleaned_data['attestation_letter']
+                rec.status = 'pending for record officer'
+                rec.comment = 'pending for record officer'
+                rec.save()
+                messages.success(request, "Documents submitted, Kindly wait for approval")
+                return redirect('screening:index')
+            else:
                 form_data = form.save(commit=False)
+                form_data.student_id = request.user.student
+                form_data.first_screening = fscreening
                 form_data.status = 'pending for record officer'
                 form_data.save()
                 messages.success(request, 'Documents submitted, Kindly wait for approval')
                 return redirect('screening:index')
-            else:
-                messages.warning(request, "An error occurred, kindly check the documents you are uploading.")
         else:
-            messages.error(request, 'User has not done first screening')
-            return redirect('screening:first_screening')
+            messages.danger(request, f"An error occurred: {form.errors.as_text}")
+
+        # if form.fields['student_id'].queryset:
+        #     if form.is_valid():
+        #         form_data = form.save(commit=False)
+        #         form_data.status = 'pending for record officer'
+        #         form_data.save()
+        #         messages.success(request, 'Documents submitted, Kindly wait for approval')
+        #         return redirect('screening:index')
+        #     else:
+        #         messages.warning(request, "An error occurred, kindly check the documents you are uploading.")
+        # else:
+        #     messages.error(request, 'User has not done first screening')
+        #     return redirect('screening:first_screening')
         
         return render(request, self.template_name, context={'form':form})
 

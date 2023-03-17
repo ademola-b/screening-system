@@ -19,16 +19,20 @@ class FirstScreeningUpload(forms.ModelForm):
         # }
 
 class SecondScreeningUpload(forms.ModelForm):
-    student_id = forms.ModelChoiceField(queryset=Student.objects.none(), empty_label=None)
-    first_screening = forms.ModelChoiceField(queryset=FirstScreening.objects.none(), empty_label=None)
+    # student_id = forms.ModelChoiceField(queryset=Student.objects.none(), empty_label=None)
+    # first_screening = forms.ModelChoiceField(queryset=FirstScreening.objects.none(), empty_label=None)
     
 
     class Meta:
         model = SecondScreening
 
-        fields = ['student_id', 'first_screening', 'acceptance_form','school_fee_receipt','medical_receipt', 
-                    'entrepreneur_receipt', 'jamb_admission_letter', 'jamb_original_result', 'attestation_letter', 'status']
+        fields = ['acceptance_form','school_fee_receipt','medical_receipt', 
+                  'entrepreneur_receipt', 'jamb_admission_letter', 'jamb_original_result', 'attestation_letter']
 
-        widgets = {
-            'student_id': forms.TextInput(attrs={'style': 'display:none'})
-        }
+          
+        # fields = ['student_id', 'first_screening', 'acceptance_form','school_fee_receipt','medical_receipt', 
+        #             'entrepreneur_receipt', 'jamb_admission_letter', 'jamb_original_result', 'attestation_letter', 'status']
+
+        # widgets = {
+        #     'student_id': forms.TextInput(attrs={'style': 'display:none'})
+        # }

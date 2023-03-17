@@ -3,35 +3,34 @@
 {% block content %}
     <div align='center'>
        
-        <h5>LIST OF FIRST SCREENINGS</h5>
         {% if fscreening %}
-        {% for screening in fscreening %}
-        <div style="float: right">
-            <form action="" method="">
-                <label>Filter List by Status: </label>
-                <select name='status' id='status'>
-                    <option value='Pending'>Pending</option>
-                    <option value='Approved'>Approved</option>
-                </select>
-            </form>
-        </div>
-            <table class="table">
-                <tr>
-                    <th>APPLICATION NO</th>
-                    <th>LEVEL</th>
-                    <th>DEPARTMENT</th>
-                    <th>STATUS</th>                
-                </tr>
-                <tr>
-                    <td><a href = "{% url 'student_affair:first_screening_detail' screening.id %}">{{screening.student_id.application_no}}</a></td>
-                    <td>{{screening.student_id.level_id}}</td>
-                    <td>{{screening.student_id.department_id.deptName}}</td>
-                    <td>{{screening.status}}</td>
-                </tr>
-            </table>
-        {% endfor %}
+            <h5>LIST OF FIRST SCREENINGS</h5>
+            {% for screening in fscreening %}
+                <div style="float: right">
+                    <form action="" method="">
+                        <label>Filter List by Status: </label>
+                        <select name='status' id='status'>
+                            <option value='Pending'>Pending</option>
+                            <option value='Approved'>Approved</option>
+                        </select>
+                    </form>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>APPLICATION NO</th>
+                        <th>LEVEL</th>
+                        <th>DEPARTMENT</th>
+                        <th>STATUS</th>                
+                    </tr>
+                    <tr>
+                        <td><a href = "{% url 'student_affair:first_screening_detail' screening.id %}">{{screening.student_id.application_no}}</a></td>
+                        <td>{{screening.student_id.level_id}}</td>
+                        <td>{{screening.student_id.department_id.deptName}}</td>
+                        <td>{{screening.status}}</td>
+                    </tr>
+                </table>
+            {% endfor %}
         {% else %}
-      
             <h3> NO FIRST SCREENING </h3>
         {% endif %}
     </div>

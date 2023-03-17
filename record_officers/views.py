@@ -72,7 +72,8 @@ def record_officer_second_modify(request, id):
         elif request.POST.get('reject'):
             if request.POST.get('comment') == '':
                 messages.warning(request, "Kindly state reasons why you are rejecting this request")
-                print('Kindly state reasons why you are rejecting this request')
+                # print('Kindly state reasons why you are rejecting this request')
+                
                 return redirect(request.path_info) #not working as i want, should be redirecting to the same page (reload)
             screening = SecondScreening.objects.get(id=id)
             screening.status = 'rejected'

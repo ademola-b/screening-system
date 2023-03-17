@@ -1,8 +1,6 @@
 {% extends 'screening/header.html' %}
 
 {% block content %}    
-    <div class="container h-100">
-        <div class="row h-100 justify-content-center align-items-center" style="margin: 20px;">
         {% if departments %}
           <h5 align="center">LIST OF DEPARTMENTS</h5>
             <table class="table table-bordered table-striped">
@@ -20,8 +18,5 @@
         {% else %}
             <h3> NO DEPARTMENT </h3>
         {% endif %}
-        </div>
-      </div>
-
 {% endblock content %}
 
