@@ -71,14 +71,14 @@ def sscreening_modify(request, id):
             screening.save()
             messages.success(request, 'Second Screening has been approved')
         elif request.POST.get('reject'):
+            screening = SecondScreening.objects.get(id=id)
             if request.POST.get('comment') == '':
                 messages.warning(request, "Kindly state reasons why you are rejecting this request")
                 print('Kindly state reasons why you are rejecting this request')
-                return redirect(request.path_info) #not working as i want, should be redirecting to the same page (reload)
+                return redirect('student_affair:second_screening_detail', screening.id)
             screening = SecondScreening.objects.get(id=id)
             screening.status = 'rejected'
             screening.comment = request.POST.get('comment')
-            # print(request.POST.get('comment'))
             screening.save()
             messages.success(request, 'Screening rejected')
 
