@@ -29,6 +29,7 @@
                 <td><h6>Attestation Letter</h6><img src="{{secondscreening.attestation_letter.url}}" alt="acceptance_fee" width="150", height="150"/></td>
             </tr>
             <tr>
+                {% if secondscreening.status == 'pending for record officer' %}
                 <td colspan="2">COMMENT:
                     <form action = "{% url 'record_officer:second_screening_modification' secondscreening.id %}" method="POST">
                         {% csrf_token %}
@@ -37,6 +38,8 @@
                         <input type="submit" class = "btn btn-danger d-grid w-100" value="Reject" name="reject">          
                     </form>  
                 </td>
+                {% else %}{% endif %}
+                
             </tr>
         </table>
      

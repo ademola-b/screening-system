@@ -22,7 +22,7 @@
                 </tr>
         {% for screening in fscreening %}
                 <tr>
-                    <td><a href = "{% url 'record_officer:screening_detail' screening.id %}">{{screening.student_id.application_no}}</a></td>
+                    <td><a href = "{% url 'record_officer:first_screening_detail' screening.id %}">{{screening.student_id.application_no}}</a></td>
                     <td>{{screening.student_id.level_id}}</td>
                     <td>{{screening.status}}</td>
                 </tr>
