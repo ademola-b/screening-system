@@ -65,7 +65,7 @@ class FirstScreeningForm(LoginRequiredMixin, View):
                 messages.success(request, "Request sent, kindly wait for approval")
                 return redirect('screening:index')
         else:
-            messages.danger(request, f"An error occurred: {form.errors.as_text}")
+            messages.warning(request, f"An error occurred: {form.errors.as_text}")
 
         return render(request, self.template_name, context={'form':form})
 
@@ -99,7 +99,7 @@ def secondScreeningView(request):
         fscreening = FirstScreening.objects.get(student_id=request.user.student.firstscreening.student_id)
         sscreening = SecondScreening.objects.get(student_id=request.user.student.secondscreening.student_id)     
     except FirstScreening.DoesNotExist:
-        messages.error(request, 'First screening has not been approved!')
+        messages.error(request, 'First screening does not exist!')
         return redirect('screening:first_screening')
     except SecondScreening.DoesNotExist:
         return redirect('screening:second_screening')
@@ -118,6 +118,9 @@ class SecondScreeningForm(View):
             # form.fields['student_id'].queryset = Student.objects.filter(application_no = request.user.student.application_no)
             # form.fields['first_screening'].queryset = FirstScreening.objects.filter(student_id = request.user.student.firstscreening.student_id) #set the user first_screening details
             fscreening = FirstScreening.objects.get(student_id = request.user.student.firstscreening.student_id)
+            # if not fscreening:
+            #     messages.warning(request, 'No record of first screening')
+                # return redirect('screening:index')
             if  fscreening.status != 'approved':
                 messages.warning(request, 'Your first screening has not been approved')
                 return redirect('screening:index')

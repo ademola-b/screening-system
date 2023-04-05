@@ -9211,7 +9211,7 @@ button.list-group-item-gray.active {
 }
 
 .h-auto {
-  height: auto !important;
+  height: 50% !important;
 }
 
 .h-25 {

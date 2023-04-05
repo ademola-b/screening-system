@@ -6,52 +6,57 @@
                 <h5> Your first screening is {{fscreening.status}} </h5> <br/>
                 <h5>These are your first screening documents </h5>
                     
-                <div style="display:inline-flex;">
-                    <div class="screening-status-card">
-                        <img src ="{{fscreening.o_level.url}}" alt="o_level" width="150", height="150"/>
-                        <div class="container">
-                            <h5><b>O'Level</b></h5> 
+                <div class="row mb-5">
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100">
+                          <div class="card-body">
+                            <h5 class="card-title">O'Level</h5>
+                          </div>
+                          <img class="img-fluid" src="{{fscreening.o_level.url}}" alt="Card image cap" />
                         </div>
                     </div>
-
-                    <div class="screening-status-card">
-                        <img src="{{fscreening.indigene_certificate.url}}" alt="ind_cert" width="150", height="150"/>
-                            
-                        <div class="container">
-                            <h5><b>Indigene Certificate</b></h5> 
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100">
+                          <div class="card-body">
+                            <h5 class="card-title">Indigene Certificate</h5>
+                          </div>
+                          <img class="img-fluid" src="{{fscreening.indigene_certificate.url}}" alt="Card image cap" />
                         </div>
                     </div>
-
-                        <div class="screening-status-card">
-                            <img src="{{fscreening.pry_certificate.url}}" alt="pry_cert" width="150", height="150"/>
-                            
-                            <div class="container">
-                                <h5><b>Primary School Cert.</b></h5> 
-                            </div>
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100">
+                          <div class="card-body">
+                            <h5 class="card-title">Primary School Certificate</h5>
+                          </div>
+                          <img class="img-fluid" src="{{fscreening.pry_certificate.url}}" alt="Card image cap" />
                         </div>
-
-                        <div class="screening-status-card">
-                            <img src="{{fscreening.ND_result.url}}" alt="ND" width="150", height="150"/>
-                            <div class="container">
-                                <h5><b>National Diploma Result</b></h5> 
-                            </div>
-                        </div>
-                        
-                        <div class="screening-status-card">
-                            <img src="{{fscreening.admission_letter.url}}" alt="adm_letter" width="150", height="150"/>
-                            <div class="container">
-                                <h5><b>Admission Letter</b></h5> 
-                            </div>
-                        </div>
-
-                        <div class="screening-status-card">
-                            <img src="{{fscreening.acceptance_fee_receipt.url}}" alt="acceptance_fee" width="150", height="150"/>
-                            <div class="container">
-                                <h5><b>Acceptance Fee Receipt</b></h5> 
-                            </div>
-                        </div>
-                    
                     </div>
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100">
+                          <div class="card-body">
+                            <h5 class="card-title">National Diploma Result</h5>
+                          </div>
+                          <img class="img-fluid" src="{{fscreening.ND_result.url}}" alt="Card image cap" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100">
+                          <div class="card-body">
+                            <h5 class="card-title">Admission Letter</h5>
+                          </div>
+                          <img class="img-fluid" src="{{fscreening.admission_letter.url}}" alt="Card image cap" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100">
+                          <div class="card-body">
+                            <h5 class="card-title">Acceptance Fee Receipt</h5>
+                          </div>
+                          <img class="img-fluid" src="{{fscreening.acceptance_fee_receipt.url}}" alt="Card image cap" />
+                        </div>
+                    </div>
+                </div>
+       
 
                 {% if fscreening.status == 'rejected' %}
                     <h5> First Screening was rejected due to the following reason(s): </h5>

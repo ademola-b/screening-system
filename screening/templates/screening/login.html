@@ -8,65 +8,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   {% load static %}
-        <link  href="{% static 'bootstrap-4.3.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
-        <link rel ="stylesheet" href = "{% static 'assets/vendor/css/page/page-auth.css' %}">    
-        <link rel ="stylesheet" href = "{% static 'assets/css/demo.css' %}" class="template-customizer-core-css">    
-        <link rel ="stylesheet" href = "{% static 'assets/vendor/css/theme-default.css' %}" class="template-customizer-core-css">
+        {% comment %} <link  href="{% static 'bootstrap-4.3.1-dist/css/bootstrap.min.css' %}" rel="stylesheet"> {% endcomment %}
         <link rel ="stylesheet" href = "{% static 'assets/vendor/css/core.css' %}" class="template-customizer-core-css">
-
+        <link rel ="stylesheet" href = "{% static 'assets/vendor/css/theme-default.css' %}" class="template-customizer-core-css">
+        <link rel ="stylesheet" href = "{% static 'assets/css/demo.css' %}">    
+        
+        <link rel ="stylesheet" href = "{% static 'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css' %}">    
+        
+        <link rel ="stylesheet" href = "{% static 'assets/vendor/css/page/page-auth.css' %}">    
+        
         <script src=" {% static 'assets/vendor/js/helpers.js' %} "></script>
         <script src=" {% static 'assets/js/config.js' %} "></script>
 </head>
 <body>
-  {% block content %}
-  <div class="content-wrapper">
-            <div class="container-xxl flex-grow-1 container-p-y">
-                <div class="authentication-wrapper authentication-basic container-p-y">
-                  <div class="authentication-inner">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <p class="mb-4">Please sign-in to your account and start the adventure</p>
-                                <form id="formAuthentication" class="mb-3"  method="POST">
-                                    {% if messages %}
-                                        {% for message in messages %}
-                                            {{message}}
-                                        {% endfor %}
-                                    {% endif %}
-                                      {% csrf_token %}
-                                     <div class="mb-3"> 
-                                      {% for field in form %}
-                                          <div class="form-label"> 
-                                            {{field.label}}
-                                          </div>
-                                            {{field}}
-                                            <br>
-                                      {% endfor %}
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="remember-me" />
-                                        <label class="form-check-label" for="remember-me"> Remember Me </label>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <button class="btn btn-primary d-grid w-100" type="submit" style="color: black">Sign in</button>
-                                        
-                                      </div>
-                                </form>
-                                <p style="text-align: center;">Having problem logging in? <a href="">Contact Admin</a></p>
-                            </div>
-                        </div>
-                      </div>
+  {% comment %} {% block content %} {% endcomment %}
+  <div class="container" style="width: 40%">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+      <div class="authentication-inner">
+        <!-- Register -->
+        <div class="card">
+          <div class="card-body">
+            <br>
+            <h4 class="mb-2">Welcome to Kadpoly Screening System! 👋</h4>
+            <p class="mb-4">Please sign-in to your account and start the exercise</p>
+
+            <form id="formAuthentication" class="mb-3" method="POST">
+              {% if messages %}
+                  {% for message in messages %}
+                      {{message}}
+                  {% endfor %}
+              {% endif %}
+                {% csrf_token %}
+                <div class="mb-3"> 
+                {% for field in form %}
+                    <div class="form-label"> 
+                      {{field.label}}
                     </div>
+                      {{field}}
+                      <br>
+                {% endfor %}
+              </div>
+              <div class="mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="remember-me" />
+                  <label class="form-check-label" for="remember-me"> Remember Me </label>
                 </div>
-            </div>
-          </div>    
-  {% endblock content %}
+              </div>
+              <div class="mb-3">
+                  <button class="btn btn-primary d-grid w-100" type="submit" style="color: black">Sign in</button>
+                </div>
+            </form>
+
+            <p class="text-center">
+              <span>Having trouble logging in?</span>
+              <a href="#">
+                <span>Contact Admin</span>
+              </a>
+            </p>
+          </div>
+        </div>
+        <!-- /Register -->
+      </div>
+    </div>
+  </div>
+
+  <!-- / Content -->
+
+  {% comment %} {% endblock content %} {% endcomment %}
 
   
-            
           <!-- Core JS -->
       <!-- build:js assets/vendor/js/core.js -->
       <script src=" {% static 'assets/vendor/libs/jquery/jquery.js' %} "></script>
@@ -78,16 +88,14 @@
       <!-- endbuild -->
   
       <!-- Vendors JS -->
-      <script src=" {% static '/assets/vendor/libs/apex-charts/apexcharts.js' %} "></script>
+      {% comment %} <script src=" {% static '/assets/vendor/libs/apex-charts/apexcharts.js' %} "></script> {% endcomment %}
   
       <!-- Main JS -->
       <script src=" {% static 'assets/js/main.js' %} "></script>
   
       <!-- Page JS -->
-      <script src=" {% static 'assets/js/dashboards-analytics.js' %} "></script>
-  
-      <!-- Place this tag in your head or just before your close body tag. -->
-      <script async defer src="https://buttons.github.io/buttons.js"></script> 
+      {% comment %} <script src=" {% static 'assets/js/dashboards-analytics.js' %} "></script> {% endcomment %}
+       
 </body>
 
 </html>

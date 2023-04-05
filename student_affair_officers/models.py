@@ -10,7 +10,7 @@ def avatar_directory_path(instance, filename):
 # Create your models here.
 class StudentAffairOfficer(models.Model):
     user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    department_id = models.OneToOneField(Department, on_delete=models.CASCADE)
+    # department_id = models.OneToOneField(Department, on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to=avatar_directory_path)
     phone_no = models.CharField(max_length=11)
 
