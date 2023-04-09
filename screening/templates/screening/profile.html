@@ -1,0 +1,51 @@
+{% extends 'screening/header.html' %}
+
+{% block title %} Profile {% endblock %}
+
+{% block content %}
+    
+    <div class="card-body">
+        <h3>PROFILE</h3><br>
+
+        <div class="d-flex">
+            <div class="col-sm-10 align-self-end">
+                <img src="{{user_details.profile_pix.url}}" alt="Profile Pic" width="150px" height="150px" style="border-radius: 50%;">
+            </div>
+        </div>
+        
+        <br>
+        <div class="row">
+            <div class="col-xxl">
+                {% if user_form %}
+                    <form action="">
+                        {% for field in user_form %}
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">{{field.label}}</label>
+                                <div class="col-sm-10">
+                                    {{field}}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </form> 
+                {% endif %}
+                {% if student_form %}
+                    <form action="">
+                            {% for field in student_form %}
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="basic-default-name">{{field.label}}</label>
+                                    <div class="col-sm-10">
+                                        {{field}}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="row justify-content-end">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                    </form> 
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

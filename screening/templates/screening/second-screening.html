@@ -8,19 +8,24 @@
         <h3>SECOND SCREENING</h3><br>
         <h4>Upload your credentials</h4>
         <p>Kindly, select the appropriate credential for each field.</p>
-        <p style="color: red;"><i><b>Only .jpg, .png and .pdf documents allowed</b></i></p>
+        <p style="color: red;"><i><b>Only .jpg and .png  documents allowed</b></i></p>
         
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <table class="table table-borderless">
-            {% for field in form %}
-            <tr>
-                <td>{{field.label_tag}}</td> <td>{{field}}</td>
-            </tr>
-            {% endfor %}
-            <td></td><td><input class="btn btn-success" type="submit" value="submit"></td>
+                {% for field in form %}
+                <tr>
+                    <td> <label for="formFile" class="form-label">{{field.label_tag}}</label> </td> <td>{{field}}</td>
+                </tr>
+                {% endfor %}
+                <td> 
+                    <div class="row justify-content-end">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">SUBMIT</button>
+                        </div>
+                    </div>
+                </td>
             </table>
-            
         </form>
     </div>
 {% endblock %}

@@ -24,7 +24,12 @@
                 <tr>
                     <td><a href = "{% url 'record_officer:first_screening_detail' screening.id %}">{{screening.student_id.application_no}}</a></td>
                     <td>{{screening.student_id.level_id}}</td>
-                    <td>{{screening.status}}</td>
+                    {% if screening.status == 'approved' %}
+                        <td><span class="badge bg-label-success me-1">{{screening.status}}</span></td>
+                    {% elif screening.status|first in 'pending' %}    
+                        <td><span class="badge bg-label-warning me-1">{{screening.status}}</span></td>
+                    {% endif %}
+                   
                 </tr>
         {% endfor %}
             </table>

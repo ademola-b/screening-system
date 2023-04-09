@@ -9,32 +9,30 @@
     <title>
         {% block title %}{% endblock %}
     </title>
-    {% load static %}
-        <link rel="stylesheet" href=" {% static 'css/style.css' %} ">
-        {% comment %} <link  href="{% static 'bootstrap-4.3.1-dist/css/bootstrap.css' %}" rel="stylesheet">
-        <link  href="{% static 'bootstrap-4.3.1-dist/css/bootstrap.min.css' %}" rel="stylesheet"> {% endcomment %}
-        <link rel ="stylesheet" href = "{% static 'assets/vendor/fonts/boxicons.css' %}">
-        <link rel ="stylesheet" href = "{% static 'assets/vendor/css/core.css' %}" class="template-customizer-core-css">
-        <link rel ="stylesheet" href = "{% static 'assets/vendor/css/theme-default.css' %}" class="template-customizer-theme-css">
-        <link rel ="stylesheet" href = "{% static 'assets/css/demo.css' %}">    
-        <link rel ="stylesheet" href = "{% static 'assets/vendor/css/page/page-auth.css' %}">    
-
-        <script src=" {% static 'assets/vendor/js/helpers.js' %} "></script>
-        <script src=" {% static 'assets/js/config.js' %} "></script>
+    
+    <link rel="stylesheet" href=" {% static 'css/style.css' %} ">
+    <link rel ="stylesheet" href = "{% static 'assets/css/demo.css' %}">    
+    <link  href="{% static 'bootstrap-4.3.1-dist/css/bootstrap.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    {% comment %} <link  href="{% static 'bootstrap-4.3.1-dist/css/bootstrap.min.css' %}" rel="stylesheet"> {% endcomment %}
+    <link rel ="stylesheet" href = "{% static 'assets/vendor/fonts/boxicons.css' %}">
+    <link rel ="stylesheet" href = "{% static 'assets/vendor/css/core.css' %}" class="template-customizer-core-css">
+    <link rel ="stylesheet" href = "{% static 'assets/vendor/css/theme-default.css' %}" class="template-customizer-theme-css">
+    {% comment %} <link rel ="stylesheet" href = "{% static 'assets/vendor/css/page/page-auth.css' %}">  {% endcomment %}
+    
+    
+    <script src=" {% static 'assets/vendor/js/helpers.js' %} "></script>
+    <script src=" {% static 'assets/js/config.js' %} "></script>
+    
+    {% include 'screening/aside-check.html' %}
 </head>
 <body>
+  
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
           <!-- Menu -->
 
-          {% if request.user.user_type == 'record_officer' %}
-            {% include 'record_officers/aside.html' %}
-          {% elif request.user.user_type == 'student_affair' %}
-            {% include 'student_affair_officers/aside.html' %}
-          {% elif request.user.user_type == 'student' %}
-            {% include 'screening/aside.html' %}
-          {% endif %}
           
           <!-- / Menu -->
   
@@ -77,9 +75,7 @@
                               data-app-light-img="illustrations/man-with-laptop-light.png"/>
                           </div>
                         </div>
-                        </div>
-                        
-                        
+                        </div>     
 
                       </div>
                       
@@ -94,17 +90,15 @@
             </div>
             <!-- Content wrapper -->
           </div>
+          
           <!-- / Layout page -->
         </div>
-  
-        <!-- Overlay -->
-      
-      <!-- / Layout wrapper -->
+        <!-- / Layout wrapper -->
      
   
       <!-- Core JS -->
       <!-- build:js assets/vendor/js/core.js -->
-      <script src=" {% static 'assets/vendor/libs/jquery/jquery.js' %} "></script>
+      {% comment %} <script src=" {% static 'assets/vendor/libs/jquery/jquery.js' %} "></script> {% endcomment %}
       <script src=" {% static 'assets/vendor/libs/popper/popper.js' %} "></script>
       <script src=" {% static 'assets/vendor/js/bootstrap.js' %} "></script>
       <script src=" {% static 'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js' %} "></script>
@@ -112,20 +106,17 @@
       <script src=" {% static 'assets/vendor/js/menu.js' %} "></script>
       <!-- endbuild -->
   
-      <!-- Vendors JS -->
-      <script src=" {% static '/assets/vendor/libs/apex-charts/apexcharts.js' %} "></script>
-  
       <!-- Main JS -->
       <script src=" {% static 'assets/js/main.js' %} "></script>
   
-      <!-- Page JS -->
-      <script src=" {% static 'assets/js/dashboards-analytics.js' %} "></script>
-  
-      <!-- Place this tag in your head or just before your close body tag. -->
-      <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-      </div>
+      {% comment %} <script src="{% static 'assets/js/caro/jquery.magnific-popup.min.js' %}"></script> {% endcomment %}
+ 
+      <script src="{% static 'assets/js/caro/jquery.min.js' %} "></script>
+      <script src=" {% static 'assets/js/caro/jquery.magnific-popup.min.js' %} "></script>
+      <script src=" {% static 'assets/js/caro/mag-click.js' %} "></script>
     </div>
+
+    {% comment %} </div> {% endcomment %}
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}

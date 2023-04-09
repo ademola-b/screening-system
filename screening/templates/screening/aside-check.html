@@ -1,0 +1,7 @@
+{% if request.user.user_type == 'record_officer' %}
+            {% include 'record_officers/aside.html' %}
+          {% elif request.user.user_type == 'student_affair' %}
+            {% include 'student_affair_officers/aside.html' %}
+          {% elif request.user.user_type == 'student' %}
+            {% include 'screening/aside.html' %}
+          {% endif %}

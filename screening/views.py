@@ -5,10 +5,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.generic import View, ListView
 
-from accounts.models import CustomUser
-from students.models import Student
-
-from . forms import FirstScreeningUpload, SecondScreeningUpload
+from . forms import (FirstScreeningUpload, SecondScreeningUpload, )
 from . models import FirstScreening
 from . models import SecondScreening
 # Create your views here.
@@ -115,22 +112,14 @@ class SecondScreeningForm(View):
         form = self.form_class()
         
         try:
-            # form.fields['student_id'].queryset = Student.objects.filter(application_no = request.user.student.application_no)
-            # form.fields['first_screening'].queryset = FirstScreening.objects.filter(student_id = request.user.student.firstscreening.student_id) #set the user first_screening details
+          
             fscreening = FirstScreening.objects.get(student_id = request.user.student.firstscreening.student_id)
             # if not fscreening:
             #     messages.warning(request, 'No record of first screening')
                 # return redirect('screening:index')
             if  fscreening.status != 'approved':
                 messages.warning(request, 'Your first screening has not been approved')
-                return redirect('screening:index')
-                
-            # if not form.fields['first_screening']:
-            #     messages.error(request, 'First Screening Record not found')
-            #     return redirect('screening:first_screening')
-            # elif not form.fields['student_id']:
-            #     messages.error(request, 'Account not found, Kindly login now')
-            #     return redirect('account:login') 
+                return redirect('screening:index') 
         except:
             messages.error(request, "An error occurred, Kindly login")
             return redirect('accounts:login')
@@ -142,9 +131,6 @@ class SecondScreeningForm(View):
         form = self.form_class(request.POST, request.FILES)
         
         try:
-            # form.fields['student_id'].queryset = Student.objects.filter(application_no = request.user.student.application_no)
-            # form.fields['first_screening'].queryset = FirstScreening.objects.filter(student_id = request.user.student.firstscreening.student_id) #set the user first_screening details 
-            #get the first screening of the user, display appropriate message
             fscreening = FirstScreening.objects.get(student_id = request.user.student.firstscreening.student_id)
             print(fscreening)
             if not fscreening:
@@ -185,22 +171,14 @@ class SecondScreeningForm(View):
                 return redirect('screening:index')
         else:
             messages.danger(request, f"An error occurred: {form.errors.as_text}")
-
-        # if form.fields['student_id'].queryset:
-        #     if form.is_valid():
-        #         form_data = form.save(commit=False)
-        #         form_data.status = 'pending for record officer'
-        #         form_data.save()
-        #         messages.success(request, 'Documents submitted, Kindly wait for approval')
-        #         return redirect('screening:index')
-        #     else:
-        #         messages.warning(request, "An error occurred, kindly check the documents you are uploading.")
-        # else:
-        #     messages.error(request, 'User has not done first screening')
-        #     return redirect('screening:first_screening')
         
         return render(request, self.template_name, context={'form':form})
 
+
+
+
+
+    
         
         
         
