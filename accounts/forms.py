@@ -12,12 +12,12 @@ class LoginForm(forms.Form):
 class UserFormView(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name']
+        fields = ['first_name', 'last_name', 'email']
 
         widgets = {
             'first_name':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name', 'readonly':'readonly'}),
             'last_name':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name', 'readonly':'readonly'}),
-        
+            'email':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name', 'readonly':'readonly'}),
         }
 
 class StudentProfileFormView(forms.ModelForm):
@@ -47,30 +47,42 @@ class StudentProfileFormView(forms.ModelForm):
     def __init__(self, request, *args, **kwargs):
         super(StudentProfileFormView, self).__init__(*args, **kwargs)
 
-        print(request.user.student.department_id)
+        # print(request.user.student.department_id)
         self.fields['level_id'].queryset = Level.objects.filter(levelInit = request.user.student.level_id)
         self.fields['department_id'].queryset = Department.objects.filter(deptName = request.user.student.department_id)
 
 class RecordOfficerProfileFormView(forms.ModelForm):
+    department_id = forms.ModelChoiceField(queryset=Department.objects.none(), 
+                                           empty_label=None, 
+                                           widget = forms.Select(
+                                            attrs={'class':'form-select','id':'exampleFormControlSelect1'}))
     class Meta:
         model = RecordOfficer
 
-        fields = ['department_id', 'phone_no', 'profile_pic']
+        fields = ['department_id', 'phone_no']
 
         widgets = {
             'department_id':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name'}),
             'phone_no':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name'}),
         }
 
+    def __init__(self, request, *args, **kwargs):
+        super(RecordOfficerProfileFormView, self).__init__(*args, **kwargs)
+
+        self.fields['department_id'].queryset = Department.objects.filter(deptName = request.user.recordofficer.department_id)
+        
+
 class StudentAffairProfileFormView(forms.ModelForm):
     class Meta:
         model = StudentAffairOfficer
 
-        fields = ['phone_no', 'profile_pic']
+        fields = ['phone_no']
 
         widgets = {
             # 'department_id':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name'}),
             'phone_no':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name'}),
         }
+
+
 
 

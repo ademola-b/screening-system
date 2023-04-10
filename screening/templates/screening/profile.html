@@ -29,7 +29,8 @@
                     </form> 
                 {% endif %}
                 {% if student_form %}
-                    <form action="">
+                    <form action="{% url 'accounts:profile' %}" method="POST">
+                        {% csrf_token %}
                             {% for field in student_form %}
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="basic-default-name">{{field.label}}</label>
@@ -40,7 +41,43 @@
                             {% endfor %}
                             <div class="row justify-content-end">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" name="update_profile" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                    </form> 
+                {% endif %}
+                {% if record_officer_form %}
+                    <form action="{% url 'accounts:profile' %}" method="POST">
+                        {% csrf_token %}
+                            {% for field in record_officer_form %}
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="basic-default-name">{{field.label}}</label>
+                                    <div class="col-sm-10">
+                                        {{field}}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="row justify-content-end">
+                                <div class="col-sm-10">
+                                    <button type="submit" name="update_profile" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                    </form> 
+                {% endif %}
+                {% if student_affair_form %}
+                    <form action="{% url 'accounts:profile' %}" method="POST">
+                        {% csrf_token %}
+                            {% for field in student_affair_form %}
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="basic-default-name">{{field.label}}</label>
+                                    <div class="col-sm-10">
+                                        {{field}}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="row justify-content-end">
+                                <div class="col-sm-10">
+                                    <button type="submit" name="update_profile" class="btn btn-primary">Update</button>
                                 </div>
                             </div>
                     </form> 

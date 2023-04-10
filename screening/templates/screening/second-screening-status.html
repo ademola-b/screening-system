@@ -5,10 +5,24 @@
         {% if sscreening %}
             <h5> Your second screening is: {{sscreening.status|title}} </h5> <br/>
             <h5>These are your second screening documents </h5>
+
+            <table class="table table-bordered table-striped parent-container">
+                <tr>
+                    <td> <h6>Acceptance Form</h6><a href="{{sscreening.acceptance_form.url}}" title="Acceptance Form"> <img src="{{sscreening.acceptance_form.url}}" alt="acceptance_form" width="200", height="200"/></a></td>
+                    <td> <h6>School Fee Receipt</h6><a href="{{sscreening.school_fee_receipt.url}}" title="School Fee Receipt"><img src="{{sscreening.school_fee_receipt.url}}" alt="school_fee_receipt" width="200", height="200"/></a></td>
+                    <td><h6>Medical Receipt</h6><a href="{{sscreening.medical_receipt.url}}" title="Medical Receipt"><img src="{{sscreening.medical_receipt.url}}" alt="medical_receipt" width="200", height="200"/></a></td>
+                </tr>
+                <tr>
+                    <td><h6>Entreprenuer Receipt</h6><a href="{{sscreening.entrepreneur_receipt.url}}" title="Entreprenuer Receipt"><img src="{{sscreening.entrepreneur_receipt.url}}" alt="Entreprenuer Receipt" width="200", height="200"/></a></td>
+                    <td><h6>Jamb Admission Letter</h6><a href="{{sscreening.jamb_admission_letter.url}}" title="Jamb Admission Letter"><img src="{{sscreening.jamb_admission_letter.url}}" alt="adm_letter" width="200", height="200"/></a></td>
+                    <td><h6>Jamb Original Result</h6><a href="{{sscreening.jamb_original_result.url}}" title="Jamb Original Result"></a><img src="{{sscreening.jamb_original_result.url}}" alt="acceptance_fee" width="200", height="200"/></td>
+                </tr>
+
+            </table>
             
-            <div style="display: grid;">
+            {% comment %} <div style="display: grid;">
                 <div class="screening-status-card">
-                    <img src ="{{sscreening.acceptance_form.url}}" alt="o_level" width="150", height="150"/>
+                    <img src ="{{}}" alt="o_level" width="150", height="150"/>
                     <div class="container">
                         <h6><b>Acceptance Form</b></h6> 
                     </div>
@@ -16,7 +30,7 @@
                 </div>
 
                 <div class="screening-status-card">
-                    <img src="{{sscreening.school_fee_receipt.url}}" alt="ind_cert" width="150", height="150"/>
+                    <img src="{{}}" alt="ind_cert" width="150", height="150"/>
                         
                     <div class="container">
                         <h6><b>School Fee Receipt</b></h6> 
@@ -24,7 +38,7 @@
                 </div>
 
                     <div class="screening-status-card">
-                        <img src="{{sscreening.medical_receipt.url}}" alt="pry_cert" width="150", height="150"/>
+                        <img src="{{}}" alt="pry_cert" width="150", height="150"/>
                         
                         <div class="container">
                             <h6><b>Medical Receipt.</b></h6> 
@@ -39,14 +53,14 @@
                     </div>
 
                     <div class="screening-status-card">
-                        <img src="{{sscreening.jamb_admission_letter.url}}" alt="adm_letter" width="150", height="150"/>
+                        <img src="{{}}" alt="adm_letter" width="150", height="150"/>
                         <div class="container">
                             <h6><b>Jamb Admission Letter</b></h6> 
                         </div>
                     </div>
 
                     <div class="screening-status-card">
-                        <img src="{{sscreening.jamb_original_result.url}}" alt="acceptance_fee" width="150", height="150"/>
+                        <img src="{{}}" alt="acceptance_fee" width="150", height="150"/>
                         <div class="container">
                             <h6><b>Jamb Original Result</b></h6> 
                         </div>
@@ -59,7 +73,7 @@
                         </div>
                     </div>
                 
-            </div>
+            </div> {% endcomment %}
 
             {% if sscreening.status == 'rejected' %}
                 <h5> Second Screening was rejected due to the following reason(s): </h5>
