@@ -5,7 +5,7 @@
         {% if firstscreening %}
             <h4> First Screening Detail For:</h4>
             <div style="float:right">
-                <img src="{{firstscreening.student_id.profile_pix.url}}" width=200 height=200/>
+                <img src="{{firstscreening.student_id.profile_pic.url}}" width=200 height=200/>
             </div>
             <div style="float:left; margin-left:30px">
                 <h5>APPLICATION NO: {{firstscreening.student_id.application_no}}</h5>  
@@ -13,17 +13,16 @@
                 <h5>STATUS: {{firstscreening.status|upper}}</h5> 
             </div>
             
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped parent-container">
                 <tr>
-                    <td><h6>O'Level</h6> <img src="{{firstscreening.o_level.url}}" alt="o_level" width="200", height="200"/></td>
-                    <td><h6>Indigene Certificate</h6><img src="{{firstscreening.indigene_certificate.url}}" alt="ind_cert" width="200", height="200"/></td>
-                    <td><h6>Primary School Leaving Certificate</h6><img src="{{firstscreening.pry_certificate.url}}" alt="pry_cert" width="200", height="200"/></td>
-                </tr>
+                    <td><h6>O'Level</h6> <a href="{{firstscreening.o_level.url}}" title="O'Level"><img src="{{firstscreening.o_level.url}}" alt="o_level" width="200", height="200"/></a> </td>
+                    <td><h6>Indigene Certificate</h6> <a href="{{firstscreening.indigene_certificate.url}}" title="Indigene Certificate"><img src="{{firstscreening.indigene_certificate.url}}" alt="ind_cert" width="200", height="200"/></a></td>
+                    <td><h6>Primary School Leaving Certificate</h6><a href="{{firstscreening.pry_certificate.url}}" title="Primary School Leaving Certificate"><img src="{{firstscreening.pry_certificate.url}}" alt="pry_cert" width="200", height="200"/></a> </td>
+                </tr>   
                 <tr>
-                    <td><h6>National Diploma Result</h6><img src="{{firstscreening.ND_result.url}}" alt="ND" width="200", height="200"/></td>
-                    <td><h6>Admission Letter</h6><img src="{{firstscreening.admission_letter.url}}" alt="adm_letter" width="200", height="200"/></td>
-                    <td><h6>Acceptance Fee</h6><img src="{{firstscreening.acceptance_fee_receipt.url}}" alt="acceptance_fee" width="200", height="200"/></td>
-
+                    <td><h6>National Diploma Result</h6><a href="{{firstscreening.ND_result.url}}" title="National Diploma Result"><img src="{{firstscreening.ND_result.url}}" alt="ND" width="200", height="200"/></a></td>
+                    <td><h6>Admission Letter</h6><a href="{{firstscreening.admission_letter.url}}" title="Admission Letter"><img src="{{firstscreening.admission_letter.url}}" alt="adm_letter" width="200", height="200"/></a></td>
+                    <td><h6>Acceptance Fee</h6><a href="{{firstscreening.acceptance_fee_receipt.url}}" title="Acceptance Fee"><img src="{{firstscreening.acceptance_fee_receipt.url}}" alt="acceptance_fee" width="200", height="200"/></a></td>
                 </tr>
                 <tr>
                     {% if firstscreening.status != 'approved' %}

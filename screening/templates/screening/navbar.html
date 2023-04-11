@@ -31,7 +31,7 @@
                         <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                           <div class="avatar avatar-online">
                             {% if user.user_type == 'student' %}
-                              <img src="{{user.student.profile_pix.url}}" alt class="w-px-40 h-100 rounded-circle" />
+                              <img src="{{user.student.profile_pic.url}}" alt class="w-px-40 h-100 rounded-circle" />
                             {% elif user.user_type == 'record_officer' %}
                               <img src="{{user.recordofficer.profile_pic.url}}" alt class="w-px-40 h-100 rounded-circle"/>
                             {% elif user.user_type == 'student_affair' %}
@@ -46,7 +46,7 @@
                                 <div class="flex-shrink-0 me-3">
                                   <div class="avatar avatar-online">
                                     {% if user.user_type == 'student' %}
-                                      <img src="{{user.student.profile_pix.url}}" alt class="w-px-40 h-100 rounded-circle" />
+                                      <img src="{{user.student.profile_pic.url}}" alt class="w-px-40 h-100 rounded-circle" />
                                     {% elif user.user_type == 'record_officer' %}
                                       <img src="{{user.recordofficer.profile_pic.url}}" alt class="w-px-40 h-100 rounded-circle" style="width: 50px; height:50px;"/>
                                     {% elif user.user_type == 'student_affair' %}

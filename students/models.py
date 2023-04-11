@@ -52,7 +52,7 @@ class Student(models.Model):
     user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     application_no = models.CharField(max_length=15, unique=True, blank=True)
     registration_no = models.CharField(max_length=12, unique=True, null=True, blank=True)
-    profile_pix = models.ImageField(upload_to=student_directory_path)
+    profile_pic = models.ImageField(upload_to=student_directory_path)
     level_id = models.ForeignKey(Level, on_delete=models.CASCADE)
     department_id = models.ForeignKey(Department, on_delete=models.CASCADE)
     phone_no = models.CharField(max_length=11)

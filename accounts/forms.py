@@ -17,7 +17,7 @@ class UserFormView(forms.ModelForm):
         widgets = {
             'first_name':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name', 'readonly':'readonly'}),
             'last_name':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name', 'readonly':'readonly'}),
-            'email':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name', 'readonly':'readonly'}),
+            'email':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name', 'readonly':'readonly', 'type':'email'}),
         }
 
 class StudentProfileFormView(forms.ModelForm):
@@ -36,12 +36,12 @@ class StudentProfileFormView(forms.ModelForm):
                   'phone_no', 'address', 'gender', 'dob']
         
         widgets = {
-            'application_no':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name'}),
+            'application_no':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name', 'readonly':'readonly'}),
             'level_id':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name'}),
             'phone_no':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name'}),
             'address':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name'}),
             'gender':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name', 'readonly':'readonly'}),
-            'dob':forms.TextInput(attrs={'class':'form-control', 'id':'basic-default-name'}),
+            'dob':forms.DateInput(attrs={'class':'form-control', 'id':'basic-default-name', 'type':'date'}),
         }
 
     def __init__(self, request, *args, **kwargs):

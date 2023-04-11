@@ -56,14 +56,15 @@ class ProfileView(LoginRequiredMixin, View):
         if user.user_type == 'student':
             user_details = Student.objects.get(user_id = request.user)
             student_form = StudentProfileFormView(request, instance=user_details)
-            # student_form.fields['department_id'].queryset = Department.objects.filter(deptName = request.user.student.department_id)
             context['user_details'] = user_details
             context['student_form'] = student_form
         elif user.user_type == 'record_officer':
             user_details = RecordOfficer.objects.get(user_id = request.user)
+            context['user_details'] = user_details
             context['record_officer_form'] = RecordOfficerProfileFormView(request, instance=user_details)
         elif user.user_type == 'student_affair':
             user_details = StudentAffairOfficer.objects.get(user_id = request.user)
+            context['user_details'] = user_details
             context['student_affair_form'] = StudentAffairProfileFormView(request, instance=user_details)
 
         return render(request, self.template_name, context=context)
