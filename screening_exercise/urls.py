@@ -18,7 +18,11 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.urls import path, include
 
+from screening.views import homepage
+
+app_name = 'scr'
 urlpatterns = [
+    path('', homepage, name='homepage'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('screening/', include('screening.urls')),

@@ -11,7 +11,7 @@ from . models import SecondScreening
 # Create your views here.
 
 def homepage(request):
-    return render(request, 'screening/homepage.html', context={})
+    return render(request, 'screening/landing.html', context={})
 
 @login_required
 def index(request):
