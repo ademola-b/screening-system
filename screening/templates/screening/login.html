@@ -8,20 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   {% load static %}
-        {% comment %} <link  href="{% static 'bootstrap-4.3.1-dist/css/bootstrap.min.css' %}" rel="stylesheet"> {% endcomment %}
+        <link  href="{% static 'bootstrap-4.3.1-dist/css/bootstrap.css' %}" rel="stylesheet">
         <link rel ="stylesheet" href = "{% static 'assets/vendor/css/core.css' %}" class="template-customizer-core-css">
         <link rel ="stylesheet" href = "{% static 'assets/vendor/css/theme-default.css' %}" class="template-customizer-core-css">
-        <link rel ="stylesheet" href = "{% static 'assets/css/demo.css' %}">    
-        
-        <link rel ="stylesheet" href = "{% static 'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css' %}">    
-        
-        <link rel ="stylesheet" href = "{% static 'assets/vendor/css/page/page-auth.css' %}">    
-        
-        <script src=" {% static 'assets/vendor/js/helpers.js' %} "></script>
-        <script src=" {% static 'assets/js/config.js' %} "></script>
 </head>
 <body>
-  {% comment %} {% block content %} {% endcomment %}
   <div class="container" style="width: 40%">
     <div class="authentication-wrapper authentication-basic container-p-y">
       <div class="authentication-inner">
@@ -33,11 +24,7 @@
             <p class="mb-4">Please sign-in to your account and start the exercise</p>
 
             <form id="formAuthentication" class="mb-3" method="POST">
-              {% if messages %}
-                  {% for message in messages %}
-                      {{message}}
-                  {% endfor %}
-              {% endif %}
+              {% include 'screening/messages.html' %}
                 {% csrf_token %}
                 <div class="mb-3"> 
                 {% for field in form %}
